@@ -1,17 +1,23 @@
-/*#include <vcl.h>
+#include <vcl.h>
 #pragma hdrstop
 
 #include "Paddle.h"
+//#include "Unit1.h"
 
-void Paddle:: MoveThePaddle(WORD &Key)
+void __fastcall Paddle:: MoveThePaddle(WORD &Key, WORD &Key1, WORD &Key2, TShape* background)
 {
-   if ( Key == VK_LEFT && paddle->Left > 15)
+         //int y_paddle = paddle->y_paddle();
+         paddle->Parent = Form1;
+       if (Key == Key1 && getTop() > 15)
         {
-             paddle->Left += x_paddle;
-
+             int y_paddle_new_Top = getTop();
+             y_paddle_new_Top += y_paddle;
+             setY_Top(y_paddle_new_Top);
         }
-        if (Key == VK_RIGHT && paddle -> Left +paddle->Width <= background->Width -25)
+        if (Key == Key2 && getTop()  <= background->Height - getTop()+90)
         {
-           paddle->Left -= x_paddle;
+           int y_paddle_new_right = getTop();
+           y_paddle_new_right = y_paddle_new_right- y_paddle;
+           setY_Top(y_paddle_new_right);
         }
-}  */
+}

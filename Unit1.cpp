@@ -11,7 +11,8 @@
 TForm1 *Form1;
 Paddle *paddle_left;
 Paddle *paddle_right;
-//Paddle paddle_left(30, 20, 130);
+//int x_ball = -8;
+
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -27,6 +28,8 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
      TShiftState Shift)
 {
- //   paddle_left.MoveThePaddle(WORD &Key);
+    paddle_left->MoveThePaddle(Key, 0x41, 0x5A, background);
+    paddle_right->MoveThePaddle(Key, VK_UP, VK_DOWN, background);
+
 }
 //---------------------------------------------------------------------------

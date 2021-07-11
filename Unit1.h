@@ -14,7 +14,7 @@ class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
         TShape *background;
-        TImage *Image2;
+        TImage *ball;
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
 private:	// User declarations
