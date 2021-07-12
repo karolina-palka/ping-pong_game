@@ -16,6 +16,7 @@ __published:	// IDE-managed Components
         TShape *background;
         TTimer *Timer1;
         TButton *Button1;
+        TLabel *Label1;
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall Timer1Timer(TObject *Sender);

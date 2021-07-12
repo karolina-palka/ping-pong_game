@@ -6,6 +6,7 @@
 #include "Unit1.h"
 #include "Paddle.h"
 #include "Ball.h"
+#include "Scoreboard.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -13,6 +14,7 @@ TForm1 *Form1;
 Paddle *paddle_left;
 Paddle *paddle_right;
 Ball *ball;
+Scoreboard *scoreboard;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -21,9 +23,11 @@ __fastcall TForm1::TForm1(TComponent* Owner)
     paddle_left = NULL;
     paddle_right = NULL;
     ball = NULL;
+    scoreboard = NULL;
     paddle_left = new Paddle(20, 110, "paddle_left");
     paddle_right = new Paddle(976, 110, "paddle_right");
     ball = new Ball(500, 300, "ball");
+    scoreboard = new Scoreboard;
 
 }
 //---------------------------------------------------------------------------
@@ -39,14 +43,27 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
-
+    char winner;
+    int bounceNumber=0;
     ball->isCollidedWithDownWall(background);
     ball->isCollidedWithUpperWall(background);
 
-     if (ball->getLeft() - ball->getWidth()<= paddle_left->getLeft() - paddle_left->getWidth())
+     if (ball->getLeft() - ball->getWidth()<= paddle_left->getLeft() - paddle_left->getWidth() -5)
+
     {
         Timer1->Enabled=false;
         ball->setVisible(false);
+        winner = 'l';
+        bounceNumber++;
+        scoreboard->setPointsForPlayerVisible(winner);
+    }
+    else if (ball->getLeft() + ball->getWidth()>= paddle_right->getLeft() + paddle_left->getWidth() +5)
+    {
+       Timer1->Enabled=false;
+       ball->setVisible(false);
+       winner = 'r';
+       bounceNumber++;
+       scoreboard->setPointsForPlayerVisible(winner);
     }
 
     else if (((ball->getLeft() - ball->getWidth() <= paddle_left->getLeft()-5)
@@ -72,8 +89,6 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 			"The left player controls by pressing the A and Z keys.\n"
 			"The left player controls by pressing the up and down arrow keys.\n"
 			"Have a nice game!\n",  "Ping-pong", MB_OK);
-
-    //Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
 
@@ -83,4 +98,5 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
    Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
+
 
