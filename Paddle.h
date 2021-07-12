@@ -3,12 +3,6 @@
 #ifndef PaddleH
 #define PaddleH
 
-#include <Classes.hpp>
-#include <Controls.hpp>
-#include <StdCtrls.hpp>
-#include <Forms.hpp>
-#include <ExtCtrls.hpp>
-
 #include <vcl.h>
 #pragma hdrstop
 #include "Unit1.h"
@@ -20,9 +14,9 @@ class Paddle
  public:
  __fastcall Paddle(int left=1, int top=1, AnsiString name="")
  {
-      y_paddle = -30;
+      y_paddle = -50;
       paddle = new TImage(NULL);
-      paddle->Parent = *Form1;
+      paddle->Parent = Form1;
 
       paddle->Picture->LoadFromFile("img/my_paddle1.bmp");
 
@@ -49,7 +43,14 @@ class Paddle
   {
        return paddle->Width;
   }
-
+   int getHeight()
+  {
+       return paddle->Height;
+  }
+   int getLeft()
+  {
+       return paddle->Left;
+  }
 };
 
 #endif
