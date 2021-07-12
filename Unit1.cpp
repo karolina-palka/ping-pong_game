@@ -21,9 +21,9 @@ __fastcall TForm1::TForm1(TComponent* Owner)
     paddle_left = NULL;
     paddle_right = NULL;
     ball = NULL;
-    paddle_left = new Paddle(20, 130, "paddle_left");
-    paddle_right = new Paddle(976, 180, "paddle_right");
-    ball = new Ball(700, 300, "ball");
+    paddle_left = new Paddle(20, 110, "paddle_left");
+    paddle_right = new Paddle(976, 110, "paddle_right");
+    ball = new Ball(500, 300, "ball");
 
 }
 //---------------------------------------------------------------------------
@@ -43,28 +43,44 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
     ball->isCollidedWithDownWall(background);
     ball->isCollidedWithUpperWall(background);
 
-     if (ball->getLeft() - ball->getWidth()<= paddle_left->getLeft() - paddle_left->getWidth() )
+     if (ball->getLeft() - ball->getWidth()<= paddle_left->getLeft() - paddle_left->getWidth())
     {
         Timer1->Enabled=false;
         ball->setVisible(false);
     }
 
     else if (((ball->getLeft() - ball->getWidth() <= paddle_left->getLeft()-5)
-    &&(ball->getTop()  <=  paddle_left->getTop() + paddle_left->getHeight() + 5)
+    &&(ball->getTop() <=  paddle_left->getTop() + paddle_left->getHeight() + 5)
      && (ball->getTop() > paddle_left->getTop()- ball->getHeight()/2) )
      ||
      ((ball->getLeft() + ball->getWidth() >= paddle_right->getLeft()+5)
-    &&(ball->getTop()  <=  paddle_right->getTop() + paddle_right->getHeight()+ 5)
+     &&(ball->getTop() <=  paddle_right->getTop() + paddle_right->getHeight()+ 5)
      && (ball->getTop() > paddle_right->getTop()- ball->getHeight()/2) ))
     {
-
        int x_ball = -ball->getX_ball();
        int x_ball_new = ball->getLeft();
        x_ball_new += x_ball;
        ball->setLeft(x_ball_new);
        ball->setX_ball(x_ball);
     }
+}
+//---------------------------------------------------------------------------
 
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+    Application->MessageBox("Welcome to the Ping-pong game!\n"
+			"The left player controls by pressing the A and Z keys.\n"
+			"The left player controls by pressing the up and down arrow keys.\n"
+			"Have a nice game!\n",  "Ping-pong", MB_OK);
+
+    //Timer1->Enabled=true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+   Button1->Visible=false;
+   Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
 
