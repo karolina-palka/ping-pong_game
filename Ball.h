@@ -63,12 +63,15 @@ class Ball
   }
   void setY_ball(int newY_ball)
   {
-      ball->y_ball = newY_ball;
+      y_ball = newY_ball;
   }
-  void setx_ball(int newX_ball)
+  void setX_ball(int newX_ball)
   {
-      ball->x_ball = newX_ball;
+      x_ball = newX_ball;
   }
+  void updateBallPosition();
+  bool isCollidedWithUpperWall(TShape* background);
+  bool isCollidedWithDownWall(TShape* background);
 };
 
 

@@ -14,7 +14,7 @@ class Paddle
  public:
  __fastcall Paddle(int left=1, int top=1, AnsiString name="")
  {
-      y_paddle = -50;
+      y_paddle = -30;
       paddle = new TImage(NULL);
       paddle->Parent = Form1;
 
