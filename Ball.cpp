@@ -21,7 +21,7 @@ bool Ball:: isCollidedWithDownWall(TShape* background)
 {
     updateBallPosition();
 
-    if (getTop() + getWidth() +5  >= background->Height)
+    if (getTop() +getHeight()/2 >= background->Height )
     {
        y_ball = -y_ball;
        int y_ball_new = getTop() + y_ball;
@@ -33,7 +33,7 @@ bool Ball:: isCollidedWithUpperWall(TShape* background)
 {
    updateBallPosition();
 
-   if (getTop() <= background->Top)
+   if (getTop() <= background->Top  )
     {
        y_ball = -y_ball;
        int y_ball_new = getTop() + y_ball;
