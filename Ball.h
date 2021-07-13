@@ -73,14 +73,4 @@ class Ball
   bool isCollidedWithUpperWall(TShape* background);
   bool isCollidedWithDownWall(TShape* background);
 };
-
-
-
-
-
-
-
-
-
-
 #endif
