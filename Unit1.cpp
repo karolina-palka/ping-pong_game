@@ -50,7 +50,6 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
     ball->isCollidedWithUpperWall(background);
 
      if (ball->getLeft() - ball->getWidth()<= paddle_left->getLeft() - paddle_left->getWidth() -5)
-
     {
         Timer1->Enabled=false;
         ball->setVisible(false);
@@ -58,11 +57,12 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
         int r_score = scoreboard->getR_playerScore();
         r_score++;
         scoreboard->setR_playerScore(r_score);
-        scoreboard->setPointsForPlayerVisible(winner);
-        scoreboard->setPointsVisible(winner);
-        scoreboard->setBounceTotalVisible(bounceNumber);
-        scoreboard->setNextRoundVisible();
-        //scoreboard->nextRoundClick(Form1, Timer1);
+        scoreboard->setPointsForPlayer(winner);
+        scoreboard->setPoints();
+        scoreboard->setBounceTotal(bounceNumber);
+        newRound->Visible = true;
+        newGame->Top = 240;
+        newGame->Visible = true;
     }
     else if (ball->getLeft() + ball->getWidth()>= paddle_right->getLeft() + paddle_left->getWidth() +5)
     {
@@ -72,11 +72,12 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
        int l_score = scoreboard->getL_playerScore();
        l_score++;
        scoreboard->setL_playerScore(l_score);
-       scoreboard->setPointsForPlayerVisible(winner);
-       scoreboard->setPointsVisible(winner);
-       scoreboard->setBounceTotalVisible(bounceNumber);
-       scoreboard->setNextRoundVisible();
-       //scoreboard->nextRoundClick(Form1, Timer1);
+       scoreboard->setPointsForPlayer(winner);
+       scoreboard->setPoints();
+       scoreboard->setBounceTotal(bounceNumber);
+       newRound->Visible=true;
+       newGame->Top = 240;
+       newGame->Visible = true;
     }
 
     else if (((ball->getLeft() - ball->getWidth() <= paddle_left->getLeft()-5)
@@ -93,6 +94,11 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
        ball->setLeft(x_ball_new);
        ball->setX_ball(x_ball);
        bounceNumber++;
+       /*if ((ball->getHeight()/2 == paddle_left->getHeight()/2) ||
+       (ball->getHeight()/2 == paddle_left->getHeight()/2))
+       {
+           Timer1->Interval = Interval - 5;
+       } */
     }
 }
 //---------------------------------------------------------------------------
@@ -106,16 +112,35 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button1Click(TObject *Sender)
+void __fastcall TForm1::newGameClick(TObject *Sender)
 {
-   Button1->Visible=false;
+   newGame->Visible=false;
+   newRound->Visible=false;
+   scoreboard->isTLabelVisible(scoreboard->getPoints(), false);
+   scoreboard->isTLabelVisible(scoreboard->getPointsForPlayer(), false);
+   scoreboard->isTLabelVisible(scoreboard->getBounceTotal(), false);
+   ball->setLeft(500);
+   ball->setTop(300);
+   ball->setVisible(true);
+   scoreboard->setL_playerScore(0);
+   scoreboard->setR_playerScore(0);
+   bounceNumber=0;
    Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
-//void __fastcall TForm1:: nextRoundClick(TObject *Sender)
-//{
-   //Button1->Visible=false;
-   //Scoreboard->nextRoundClick(MainMenu);
-   //Timer1->Enabled=true;
-//}
+
+
+void __fastcall TForm1::newRoundClick(TObject *Sender)
+{
+   newGame->Visible=false;
+   newRound->Visible=false;
+   scoreboard->isTLabelVisible(scoreboard->getPoints(), false);
+   scoreboard->isTLabelVisible(scoreboard->getPointsForPlayer(), false);
+   scoreboard->isTLabelVisible(scoreboard->getBounceTotal(), false);
+   ball->setLeft(500);
+   ball->setTop(300);
+   ball->setVisible(true);
+   Timer1->Enabled=true;
+}
+//---------------------------------------------------------------------------
 
