@@ -39,7 +39,7 @@ __published:	// IDE-managed Components
 private:
         bool __fastcall isCollidedWithLeftWall();
         bool __fastcall isCollidedWithRightWall();
-        bool __fastcall isBallCollidedWithCentrePaddle();
+        bool __fastcall isBallCollidedWithCenterPaddle();
         bool __fastcall isCollidedWithPaddle();
         void __fastcall ballWallCollision();
         void __fastcall changeBallReboundAngle();

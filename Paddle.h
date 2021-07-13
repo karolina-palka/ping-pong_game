@@ -18,7 +18,7 @@ class Paddle
       paddle = new TImage(NULL);
       paddle->Parent = Form1;
 
-      paddle->Picture->LoadFromFile("img/paddle1.bmp");
+      paddle->Picture->LoadFromFile("img/paddle3.bmp");
 
       paddle->Left = left;
       paddle->Top = top;

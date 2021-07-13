@@ -115,7 +115,7 @@ bool __fastcall TForm1:: isCollidedWithPaddle()
      return status;
 }
 
-bool __fastcall TForm1:: isBallCollidedWithCentrePaddle()
+bool __fastcall TForm1:: isBallCollidedWithCenterPaddle()
 {
    bool status = false;
    if (((ball->getTop() >= paddle_right->getHeight()/2 -(ball->getHeight() + ball->getHeight()/2)) &&
@@ -172,7 +172,7 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
           ball->setX_ball(x_ball);
           bounceNumber++;
        }
-       if (isBallCollidedWithCentrePaddle())
+       if (isBallCollidedWithCenterPaddle())
        {
            if ( Timer1->Interval >= 10
            )
@@ -192,6 +192,8 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
     Application->MessageBox("Welcome to the Ping-pong game!\n"
 			"The left player controls by pressing the A and Z keys.\n"
 			"The right player controls by pressing the up and down arrow keys.\n"
+                        "When the ball collides with the center of paddle it will accelerate"
+                        "and change the rebound angle.\n"
 			"Have a nice game!\n",  "Ping-pong", MB_OK);
 }
 //---------------------------------------------------------------------------
