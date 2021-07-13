@@ -21,8 +21,11 @@ __published:	// IDE-managed Components
         TTimer *left_down;
         TTimer *right_up;
         TTimer *right_down;
+        TShape *Shape1;
+        TShape *Shape2;
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
+
         void __fastcall Timer1Timer(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall newGameClick(TObject *Sender);
@@ -33,8 +36,15 @@ __published:	// IDE-managed Components
         void __fastcall right_downTimer(TObject *Sender);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
           TShiftState Shift);
-private:	// User declarations
-public:		// User declarations
+private:
+        bool __fastcall isCollidedWithLeftWall();
+        bool __fastcall isCollidedWithRightWall();
+        bool __fastcall isBallCollidedWithCentrePaddle();
+        bool __fastcall isCollidedWithPaddle();
+        void __fastcall ballWallCollision();
+        void __fastcall changeBallReboundAngle();
+	// User declarations
+public:	
         __fastcall TForm1(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
