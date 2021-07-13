@@ -34,12 +34,10 @@ bool Ball:: isCollidedWithUpperWall(TShape* background)
    updateBallPosition();
 
    if (getTop() <= background->Top )
-    {
+   {
        y_ball = -y_ball;
        int y_ball_new = getTop() + y_ball;
        setTop(y_ball_new);
        setY_ball(y_ball);
-    }
-
-
+   }
 }

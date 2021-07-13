@@ -52,6 +52,5 @@ void Scoreboard:: setBounceTotal(int bounceNumber)
    isTLabelVisible(bounceTotal, true);
    AnsiString score = IntToStr(bounceNumber);
    bounceTotal->Caption = "Total bounces: " +score;
-   //bounceTotal->Visible = false;
 }
 
