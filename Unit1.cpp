@@ -8,6 +8,8 @@
 #include "Ball.h"
 #include "Scoreboard.h"
 #include <math>
+#include <cstdlib>
+#include <time.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -58,7 +60,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 bool __fastcall TForm1:: isCollidedWithLeftWall()
 {                  
    bool status = false;
-   if(ball->getLeft()<= paddle_left->getLeft() - paddle_left->getWidth() -5)
+   if(ball->getLeft()<= paddle_left->getLeft() - paddle_left->getWidth()+ 15)
    status = true;
    return status;
 }
@@ -66,7 +68,7 @@ bool __fastcall TForm1:: isCollidedWithLeftWall()
 bool __fastcall TForm1:: isCollidedWithRightWall()
 {
    bool status = false;
-   if (ball->getLeft() + ball->getWidth()>= paddle_right->getLeft() + paddle_right->getWidth() +15)
+   if (ball->getLeft() + ball->getWidth()>= paddle_right->getLeft() + paddle_right->getWidth() +5 )
    status = true;
    return status;
 }
@@ -102,13 +104,13 @@ void __fastcall TForm1:: ballWallCollision()
 bool __fastcall TForm1:: isCollidedWithPaddle()
 {
     bool status = false;
-    if (((ball->getLeft() - paddle_left->getWidth() <= paddle_left->getLeft())
+    if (((ball->getLeft() <= paddle_left->getLeft() + paddle_left->getWidth() )
     &&(ball->getTop() <=  paddle_left->getTop() + paddle_left->getHeight())
-     && (ball->getTop() >= paddle_left->getTop()- ball->getHeight()/2) )
+     && (ball->getTop() >= paddle_left->getTop()- ball->getHeight()) )
      ||
      ((ball->getLeft() + ball->getWidth() >= paddle_right->getLeft())
      &&(ball->getTop() <=  paddle_right->getTop() + paddle_right->getHeight())
-     && (ball->getTop() >= paddle_right->getTop()- ball->getHeight()/2 ) ))
+     && (ball->getTop() >= paddle_right->getTop()- ball->getHeight() ) ))
      status = true;
      return status;
 }
@@ -131,7 +133,6 @@ void __fastcall TForm1:: changeBallReboundAngle()
     double y_ball_new = 0;
     double x_ball = ball->getX_ball();
     double y_ball = ball->getY_ball();
-
     double vectorLenSq = x_ball*x_ball + y_ball*y_ball;
     double x_ball_new = 1.1*x_ball;
     double y_ballSq = (vectorLenSq - x_ball_new*x_ball_new);
@@ -140,7 +141,7 @@ void __fastcall TForm1:: changeBallReboundAngle()
     {
         y_ballSq = -y_ballSq;
     }
-    else if ( y_ballSq ==0)
+    else if (y_ballSq ==0)
     {
         x_ball_new = 0.9*x_ball;
         y_ballSq = ((x_ball*x_ball + y_ball*y_ball) - x_ball_new*x_ball_new);
@@ -157,18 +158,24 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
     ball->isCollidedWithUpperWall(background);
 
     ballWallCollision();
+
     if (isCollidedWithPaddle())
     {
-       double x_ball = -ball->getX_ball();
-       double x_ball_new = ball->getLeft();
-       x_ball_new += x_ball;
-       ball->setLeft(x_ball_new);
-       ball->setX_ball(x_ball);
-       bounceNumber++;
-
+        double x_ball = ball->getX_ball();
+        double y_ball = ball->getY_ball();
+       if (x_ball !=0 && y_ball!=0)
+       {
+          x_ball = -x_ball;
+          double x_ball_new = ball->getLeft();
+          x_ball_new += x_ball;
+          ball->setLeft(x_ball_new);
+          ball->setX_ball(x_ball);
+          bounceNumber++;
+       }
        if (isBallCollidedWithCentrePaddle())
        {
-           if ( Timer1->Interval >= 5)
+           if ( Timer1->Interval >= 10
+           )
            {
                 Timer1->Interval = Timer1->Interval - 5;
                 changeBallReboundAngle();
@@ -177,7 +184,6 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
      }
      else if (isCollidedWithLeftWall()) {}
      else if (isCollidedWithRightWall()) {}
-
 }
 //---------------------------------------------------------------------------
 

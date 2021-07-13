@@ -14,7 +14,7 @@ class Paddle
  public:
  __fastcall Paddle(int left=1, int top=1, AnsiString name="")
  {
-      y_paddle = -50;
+      y_paddle = -20;
       paddle = new TImage(NULL);
       paddle->Parent = Form1;
 
@@ -27,7 +27,6 @@ class Paddle
       paddle->Transparent=true;
  };
  __fastcall ~Paddle(){};
-   void __fastcall Timer2Timer();
   int getY_paddle()
   {
        return y_paddle;
