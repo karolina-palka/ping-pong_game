@@ -3,16 +3,16 @@
 
 #include "Scoreboard.h"
 
-void Scoreboard:: createTLabel(TLabel *tlabel, int top)
+void Scoreboard:: createTLabel(TLabel *tlabel, int top, int left, int width)
 {
       tlabel->Layout = tlCenter;
       tlabel->AutoSize = false;
       tlabel->Visible = false;
       tlabel->Align = alNone;
 
-      tlabel->Left = 266;
+      tlabel->Left = left;
       tlabel->Top = top;
-      tlabel->Width = 500;
+      tlabel->Width = width;
       tlabel->Height = 43;
       tlabel->Enabled = true;
       tlabel->Alignment = taCenter;

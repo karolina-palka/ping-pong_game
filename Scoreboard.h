@@ -21,9 +21,9 @@ class Scoreboard
       bounceTotal = new TLabel(NULL);
       bounceTotal->Parent = Form1;
 
-      createTLabel(pointsForPlayer, 40);
-      createTLabel(points, 100);
-      createTLabel(bounceTotal, 160);
+      createTLabel(pointsForPlayer, 40, 266, 500);
+      createTLabel(points, 100, 430, 150 );
+      createTLabel(bounceTotal, 160, 266, 500);
 
       r_score=0;
       l_score=0;
@@ -33,7 +33,7 @@ class Scoreboard
   void setPoints();
   void setPointsForPlayer(char winner);
   void setBounceTotal(int bounceNumber);
-  void createTLabel(TLabel *tlabel, int top);
+  void createTLabel(TLabel *tlabel, int top, int left, int width);
   void setNextRoundVisible();
   void setR_playerScore(int newRscore)
   {

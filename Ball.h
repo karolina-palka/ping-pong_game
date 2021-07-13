@@ -7,13 +7,13 @@
 
 class Ball
 {
-  int x_ball, y_ball;
+  double x_ball, y_ball;
   TImage *ball;
   public:
   __fastcall Ball(int left=1, int top=1, AnsiString name="")
   {
-      x_ball = -8;
-      y_ball = -8;
+      x_ball = -8.0;
+      y_ball = -8.0;
       ball = new TImage(NULL);
       ball->Parent = Form1;
 
@@ -25,27 +25,27 @@ class Ball
       ball->AutoSize = true;
       ball->Transparent = true;
   };
-  int getX_ball()
+  double getX_ball()
   {
       return x_ball;
   }
-   int getY_ball()
+   double getY_ball()
   {
       return y_ball;
   }
-   int getLeft()
+   double getLeft()
   {
       return ball->Left;
   }
-  int getWidth()
+  double getWidth()
   {
       return ball->Width;
   }
-   int getTop()
+   double getTop()
   {
       return ball->Top;
   }
-   int getHeight()
+   double getHeight()
   {
       return ball->Height;
   }
