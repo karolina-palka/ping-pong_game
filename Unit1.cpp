@@ -193,7 +193,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 			"The left player controls by pressing the A and Z keys.\n"
 			"The right player controls by pressing the up and down arrow keys.\n"
                         "When the ball collides with the center of paddle it will accelerate"
-                        "and change the rebound angle.\n"
+                        " and changes the rebound angle.\n"
 			"Have a nice game!\n",  "Ping-pong", MB_OK);
 }
 //---------------------------------------------------------------------------
