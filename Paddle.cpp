@@ -8,7 +8,7 @@ void __fastcall Paddle:: MoveThePaddle(WORD &Key, WORD &Key1, WORD &Key2, TShape
 {
          //int y_paddle = paddle->y_paddle();
          paddle->Parent = Form1;
-       if (Key == Key1 && getTop() >= 31)
+       if (Key == Key1 && getTop() >= 20)
         {
              int y_paddle_new_Top = getTop();
              y_paddle_new_Top += y_paddle;

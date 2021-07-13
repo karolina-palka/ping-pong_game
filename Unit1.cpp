@@ -15,6 +15,7 @@ Paddle *paddle_left;
 Paddle *paddle_right;
 Ball *ball;
 Scoreboard *scoreboard;
+int bounceNumber=0;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -44,7 +45,7 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
     char winner;
-    int bounceNumber=0;
+    //int bounceNumber=0;
     ball->isCollidedWithDownWall(background);
     ball->isCollidedWithUpperWall(background);
 
@@ -53,17 +54,29 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
     {
         Timer1->Enabled=false;
         ball->setVisible(false);
-        winner = 'l';
-        bounceNumber++;
+        winner = 'r';
+        int r_score = scoreboard->getR_playerScore();
+        r_score++;
+        scoreboard->setR_playerScore(r_score);
         scoreboard->setPointsForPlayerVisible(winner);
+        scoreboard->setPointsVisible(winner);
+        scoreboard->setBounceTotalVisible(bounceNumber);
+        scoreboard->setNextRoundVisible();
+        //scoreboard->nextRoundClick(Form1, Timer1);
     }
     else if (ball->getLeft() + ball->getWidth()>= paddle_right->getLeft() + paddle_left->getWidth() +5)
     {
        Timer1->Enabled=false;
        ball->setVisible(false);
-       winner = 'r';
-       bounceNumber++;
+       winner = 'l';
+       int l_score = scoreboard->getL_playerScore();
+       l_score++;
+       scoreboard->setL_playerScore(l_score);
        scoreboard->setPointsForPlayerVisible(winner);
+       scoreboard->setPointsVisible(winner);
+       scoreboard->setBounceTotalVisible(bounceNumber);
+       scoreboard->setNextRoundVisible();
+       //scoreboard->nextRoundClick(Form1, Timer1);
     }
 
     else if (((ball->getLeft() - ball->getWidth() <= paddle_left->getLeft()-5)
@@ -79,6 +92,7 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
        x_ball_new += x_ball;
        ball->setLeft(x_ball_new);
        ball->setX_ball(x_ball);
+       bounceNumber++;
     }
 }
 //---------------------------------------------------------------------------
@@ -98,5 +112,10 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
    Timer1->Enabled=true;
 }
 //---------------------------------------------------------------------------
-
+//void __fastcall TForm1:: nextRoundClick(TObject *Sender)
+//{
+   //Button1->Visible=false;
+   //Scoreboard->nextRoundClick(MainMenu);
+   //Timer1->Enabled=true;
+//}
 
