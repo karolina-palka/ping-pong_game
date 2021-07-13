@@ -10,8 +10,6 @@ class Scoreboard
   TLabel *pointsForPlayer;
   TLabel *points;
   TLabel *bounceTotal;
-  TButton *nextRound;
-  TButton *newGame;
   int r_score, l_score;
   public:
   __fastcall Scoreboard()
@@ -23,25 +21,19 @@ class Scoreboard
       bounceTotal = new TLabel(NULL);
       bounceTotal->Parent = Form1;
 
-      nextRound = new TButton(this);
-      nextRound->Parent = Form1;
-      newGame = new TButton(this);
-      newGame->Parent = Form1;
-
       createTLabel(pointsForPlayer, 40);
-      createTLabel(points, 90);
-      createTLabel(bounceTotal, 150);
-      createTButton(nextRound, 200);
+      createTLabel(points, 100);
+      createTLabel(bounceTotal, 160);
 
       r_score=0;
       l_score=0;
 
   };
-  void isPointsVisible(char winner, bool status);
-  void isPointsForPlayerVisible(char winner,  bool status);
-  void isBounceTotalVisible(int bounceNumber,  bool status);
+  void isTLabelVisible(TLabel* tlabel, bool status);
+  void setPoints();
+  void setPointsForPlayer(char winner);
+  void setBounceTotal(int bounceNumber);
   void createTLabel(TLabel *tlabel, int top);
-  void createTButton(TButton *tbutton, int top);
   void setNextRoundVisible();
   void setR_playerScore(int newRscore)
   {
@@ -59,6 +51,17 @@ class Scoreboard
   {
      return l_score;
   }
-  void __fastcall nextRoundClick(TObject *Sender, TTimer* Timer);
+  TLabel* getPoints()
+  {
+      return points;
+  }
+  TLabel* getPointsForPlayer()
+  {
+      return pointsForPlayer;
+  }
+  TLabel* getBounceTotal()
+  {
+      return bounceTotal;
+  }
 };
 #endif

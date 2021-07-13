@@ -10,7 +10,7 @@ void Scoreboard:: createTLabel(TLabel *tlabel, int top)
       tlabel->Visible = false;
       tlabel->Align = alNone;
 
-      tlabel->Left = 324;
+      tlabel->Left = 266;
       tlabel->Top = top;
       tlabel->Width = 500;
       tlabel->Height = 43;
@@ -21,28 +21,14 @@ void Scoreboard:: createTLabel(TLabel *tlabel, int top)
       tlabel->Font->Size=23;
       tlabel->Font->Name = "MS UI Gothic";
 }
-void Scoreboard:: createTButton(TButton *tbutton, int top)
+void Scoreboard:: isTLabelVisible(TLabel* tlabel, bool status)
 {
-    //tbutton->Layout = tlCenter;
-    //->AutoSize = false;
-    tbutton->Visible = false;
-    tbutton->Align = alNone;
-
-    tbutton->Left = 324;
-    tbutton->Top = top;
-    tbutton->Width = 500;
-    tbutton->Height = 43;
-    tbutton->Enabled = true;
-    //tbutton->Alignment = taCenter;
-    tbutton->Name = "pointsForPlayer";
-    tbutton->Caption = "point for the" ;
-    tbutton->Font->Size=23;
-    tbutton->Font->Name = "MS UI Gothic";
+    tlabel->Visible = status;
 }
 
-void Scoreboard:: setPointsForPlayerVisible(char winner, bool status)
+void Scoreboard:: setPointsForPlayer(char winner)
 {
-   pointsForPlayer->Visible=status;
+   isTLabelVisible(pointsForPlayer, true);
    AnsiString pointLabel = "Points for the ";
    if (winner == 'r')
    {
@@ -53,37 +39,18 @@ void Scoreboard:: setPointsForPlayerVisible(char winner, bool status)
       pointsForPlayer->Caption = "< " + pointLabel + "left player";
    }
 }
-void Scoreboard:: isPointsVisible(char winner, bool status)
+void Scoreboard:: setPoints()
 {
-   points->Visible=status;
-   if (winner == 'r')
-   {
-      AnsiString score = IntToStr(r_score);
-      points->Caption = "0 : " + score;
-   }
-   else
-   {
-      AnsiString score = IntToStr(l_score);
-      points->Caption =  "1 : " + score;
-   }
+   isTLabelVisible(points, true);
+
+   AnsiString r_score_str = IntToStr(getR_playerScore());
+   AnsiString l_score_str = IntToStr(getL_playerScore());
+   points->Caption = l_score_str + " : " + r_score_str;
 }
-void Scoreboard:: isBounceTotalVisible(int bounceNumber, bool status)
+void Scoreboard:: setBounceTotal(int bounceNumber)
 {
-   bounceTotal->Visible=status;
+   isTLabelVisible(bounceTotal, true);
    AnsiString score = IntToStr(bounceNumber);
    bounceTotal->Caption = "Total bounces: " +score;
 }
-void Scoreboard:: setNextRoundVisible(bool status)
-{
-   nextRound->Visible = status;
-   nextRound->Font->Color = clGreen;
-   nextRound->Caption = "Next round >";
-}
 
-void __fastcall Scoreboard:: nextRoundClick(TObject *Sender, TTimer* Timer1)
-{
-   //nextRound->Visible=false;
-   //Timer1->Parent = Form1;
-   Timer1->Enabled=true;
-
-}
