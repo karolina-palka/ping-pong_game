@@ -29,6 +29,7 @@ class Scoreboard
       l_score=0;
 
   };
+ __fastcall ~Scoreboard(){};
   void isTLabelVisible(TLabel* tlabel, bool status);
   void setPoints();
   void setPointsForPlayer(char winner);

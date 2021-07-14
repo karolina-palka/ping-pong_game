@@ -25,6 +25,7 @@ class Ball
       ball->AutoSize = true;
       ball->Transparent = true;
   };
+ __fastcall ~Ball(){};
   double getX_ball()
   {
       return x_ball;

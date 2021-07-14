@@ -72,7 +72,7 @@ bool __fastcall TForm1:: isCollidedWithRightWall()
    status = true;
    return status;
 }
-void __fastcall TForm1:: ballWallCollision()
+void __fastcall TForm1:: checkLeftRightWallCollision()
 {
     char winner;
     if (isCollidedWithLeftWall() || isCollidedWithRightWall())
@@ -157,8 +157,6 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
     ball->isCollidedWithDownWall(background);
     ball->isCollidedWithUpperWall(background);
 
-    ballWallCollision();
-
     if (isCollidedWithPaddle())
     {
         double x_ball = ball->getX_ball();
@@ -182,8 +180,7 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
            }
         }
      }
-     else if (isCollidedWithLeftWall()) {}
-     else if (isCollidedWithRightWall()) {}
+    checkLeftRightWallCollision();
 }
 //---------------------------------------------------------------------------
 

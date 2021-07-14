@@ -41,7 +41,7 @@ private:
         bool __fastcall isCollidedWithRightWall();
         bool __fastcall isBallCollidedWithCenterPaddle();
         bool __fastcall isCollidedWithPaddle();
-        void __fastcall ballWallCollision();
+        void __fastcall checkLeftRightWallCollision();
         void __fastcall changeBallReboundAngle();
 	// User declarations
 public:	
