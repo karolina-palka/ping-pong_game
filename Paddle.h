@@ -5,6 +5,7 @@
 
 #include <vcl.h>
 #pragma hdrstop
+#include <Graphics.hpp>
 #include "Unit1.h"
 
 class Paddle
@@ -54,6 +55,10 @@ class Paddle
   void setTop(int newTop)
   {
       paddle->Top = newTop;
+  }
+  void setLeft(int newLeft)
+  {
+      paddle->Left = newLeft;
   }
 };
 
