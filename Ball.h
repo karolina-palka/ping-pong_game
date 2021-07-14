@@ -3,6 +3,7 @@
 
 #include <vcl.h>
 #pragma hdrstop
+#include <Graphics.hpp>
 #include "Unit1.h"
 
 class Ball
@@ -25,7 +26,7 @@ class Ball
       ball->AutoSize = true;
       ball->Transparent = true;
   };
- __fastcall ~Ball(){};
+  __fastcall ~Ball(){};
   double getX_ball()
   {
       return x_ball;

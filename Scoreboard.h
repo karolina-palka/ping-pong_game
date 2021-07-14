@@ -29,7 +29,7 @@ class Scoreboard
       l_score=0;
 
   };
- __fastcall ~Scoreboard(){};
+  __fastcall ~Scoreboard(){};
   void isTLabelVisible(TLabel* tlabel, bool status);
   void setPoints();
   void setPointsForPlayer(char winner);
@@ -63,6 +63,46 @@ class Scoreboard
   TLabel* getBounceTotal()
   {
       return bounceTotal;
+  }
+  void setBounceTotalLeft(int newLeft)
+  {
+      bounceTotal->Left = newLeft;
+  }
+  int getBounceTotalTop()
+  {
+      return bounceTotal->Top;
+  }
+   setBounceTotalTop(int newTop)
+  {
+      bounceTotal->Top = newTop;
+  }
+  void setPointsForPlayerTop(int newTop)
+  {
+      pointsForPlayer->Top = newTop;
+  }
+  void setPointsForPlayerLeft(int newLeft)
+  {
+      pointsForPlayer->Left = newLeft;
+  }
+   void setPointsLeft(int newLeft)
+  {
+      points->Left = newLeft;
+  }
+    void setPointsTop(int newTop)
+  {
+      points->Top = newTop;
+  }
+  int getPointsWidth()
+  {
+      return points->Width;
+  }
+  int getPointsForPlayerWidth()
+  {
+      return pointsForPlayer->Width;
+  }
+  int getBounceTotalWidth()
+  {
+      return bounceTotal->Width;
   }
 };
 #endif

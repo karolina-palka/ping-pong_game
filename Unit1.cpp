@@ -8,8 +8,7 @@
 #include "Ball.h"
 #include "Scoreboard.h"
 #include <math>
-#include <cstdlib>
-#include <time.h>
+#include "mmsystem.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -28,10 +27,13 @@ __fastcall TForm1::TForm1(TComponent* Owner)
     paddle_right = NULL;
     ball = NULL;
     scoreboard = NULL;
-    paddle_left = new Paddle(20, 140, "paddle_left");
-    paddle_right = new Paddle(976, 140, "paddle_right");
-    ball = new Ball(500, 300, "ball");
+
+    paddle_left = new Paddle(background->Left +20, 140, "paddle_left");
+    paddle_right = new Paddle(background->Width - 58, 140, "paddle_right");
+    ball = new Ball(500, 0.5*background->Height, "ball");
     scoreboard = new Scoreboard;
+    vertical->Left = 0.5*background->Width;
+    horizontal->Top = 0.5*background->Height;
 
 }
 //---------------------------------------------------------------------------
@@ -97,7 +99,7 @@ void __fastcall TForm1:: checkLeftRightWallCollision()
         scoreboard->setPoints();
         scoreboard->setBounceTotal(bounceNumber);
         newRound->Visible = true;
-        newGame->Top = 260;
+        newGame->Top = 0.75*background->Height - newGame->Height/2;
         newGame->Visible = true;
     }
 }
@@ -154,6 +156,7 @@ void __fastcall TForm1:: changeBallReboundAngle()
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
     char winner;
+
     ball->isCollidedWithDownWall(background);
     ball->isCollidedWithUpperWall(background);
 
@@ -164,6 +167,8 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
        if (x_ball !=0 && y_ball!=0)
        {
           x_ball = -x_ball;
+          //MediaPlayer1->Play();
+          //sndPlaySound("snd/ping.wav.mp3", SND_ASYNC);
           double x_ball_new = ball->getLeft();
           x_ball_new += x_ball;
           ball->setLeft(x_ball_new);
@@ -180,7 +185,7 @@ void __fastcall TForm1::Timer1Timer(TObject *Sender)
            }
         }
      }
-    checkLeftRightWallCollision();
+     checkLeftRightWallCollision();
 }
 //---------------------------------------------------------------------------
 
@@ -192,6 +197,9 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
                         "When the ball collides with the center of paddle it will accelerate"
                         " and changes the rebound angle.\n"
 			"Have a nice game!\n",  "Ping-pong", MB_OK);
+    //MediaPlayer1->FileName = "snd/ping.wav.mp3";
+    //MediaPlayer1->Open();
+
 }
 //---------------------------------------------------------------------------
 
@@ -200,6 +208,7 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
    if(newRound->Visible==true)
    {
         if (Application->MessageBox(
+
         "Are you sure you want to start again?\n", "Confirm", MB_YESNO)==IDYES)
         {
            newRound->Visible=false;
@@ -292,5 +301,36 @@ void __fastcall TForm1::right_downTimer(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
+{
+    //MediaPlayer1->Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormResize(TObject *Sender)
+{
+    //Timer1->Enabled=false;
+    paddle_left->setLeft(background->Left +20);
+    paddle_left->setTop(0.5*background->Height - paddle_left->getHeight()/2);
+    paddle_right->setLeft(background->Width - 58);
+    paddle_right->setTop(0.5*background->Height - paddle_left->getHeight()/2 );
+    vertical->Left = 0.5*background->Width;
+    horizontal->Top = 0.5*background->Height;
+
+    scoreboard->setPointsLeft(0.5*background->Width - scoreboard->getPointsWidth()/2);
+    scoreboard->setPointsForPlayerLeft(0.5*background->Width -  scoreboard->getPointsForPlayerWidth()/2);
+    scoreboard->setBounceTotalLeft(0.5*background->Width - scoreboard->getBounceTotalWidth()/2);
+    scoreboard->setPointsTop(0.1*background->Height -15);
+    scoreboard->setPointsForPlayerTop(0.2*background->Height - 10);
+    scoreboard->setBounceTotalTop(0.3*background->Height - 5);
+
+    newRound->Left = 0.5*background->Width - newRound->Width/2;
+    newRound->Top = 0.5*background->Height - newRound->Height/2;
+
+    newGame->Left = 0.5*background->Width - newGame->Width/2;
+    newGame->Top = 0.7*background->Height - newGame->Height/2;
+
+}
+//---------------------------------------------------------------------------
 
 

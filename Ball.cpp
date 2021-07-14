@@ -19,8 +19,8 @@ void Ball:: updateBallPosition()
 
 bool Ball:: isCollidedWithDownWall(TShape* background)
 {
-    bool status = false;
     updateBallPosition();
+    bool status = false;
 
     if (getTop() +getHeight()/2 >= background->Height )
     {
@@ -34,8 +34,8 @@ bool Ball:: isCollidedWithDownWall(TShape* background)
 }
 bool Ball:: isCollidedWithUpperWall(TShape* background)
 {
-    bool status = false;
-    updateBallPosition();
+   updateBallPosition();
+   bool status = false;
 
    if (getTop() <= background->Top )
    {
@@ -43,7 +43,6 @@ bool Ball:: isCollidedWithUpperWall(TShape* background)
        int y_ball_new = getTop() + y_ball;
        setTop(y_ball_new);
        setY_ball(y_ball);
-       status = true;
    }
    return status;
 }
