@@ -10,6 +10,7 @@
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
 #include <MPlayer.hpp>
+#include "pies.h"
 //---------------------------------------------------------------------------
 class TForm1 : public TForm
 {
@@ -37,7 +38,6 @@ __published:	// IDE-managed Components
         void __fastcall right_downTimer(TObject *Sender);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
           TShiftState Shift);
-        void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
         void __fastcall FormResize(TObject *Sender);
 private:
         bool __fastcall isCollidedWithLeftWall();
@@ -47,7 +47,7 @@ private:
         void __fastcall checkLeftRightWallCollision();
         void __fastcall changeBallReboundAngle();
 	// User declarations
-public:	
+public:
         __fastcall TForm1(TComponent* Owner);
 };
 //---------------------------------------------------------------------------

@@ -72,7 +72,7 @@ class Scoreboard
   {
       return bounceTotal->Top;
   }
-   setBounceTotalTop(int newTop)
+   void setBounceTotalTop(int newTop)
   {
       bounceTotal->Top = newTop;
   }
