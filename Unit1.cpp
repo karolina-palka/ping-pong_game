@@ -11,6 +11,7 @@
 #include "mmsystem.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma link "pies"
 #pragma resource "*.dfm"
 TForm1 *Form1;
 Paddle *paddle_left;
@@ -30,7 +31,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
     paddle_left = new Paddle(background->Left +20, 140, "paddle_left");
     paddle_right = new Paddle(background->Width - 58, 140, "paddle_right");
-    ball = new Ball(500, 0.5*background->Height, "ball");
+    ball = new Ball(0.5*background->Width, 0.5*background->Height, "ball");
     scoreboard = new Scoreboard;
     vertical->Left = 0.5*background->Width;
     horizontal->Top = 0.5*background->Height;
@@ -301,15 +302,9 @@ void __fastcall TForm1::right_downTimer(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::FormClose(TObject *Sender, TCloseAction &Action)
-{
-    //MediaPlayer1->Close();
-}
-//---------------------------------------------------------------------------
 
 void __fastcall TForm1::FormResize(TObject *Sender)
 {
-    //Timer1->Enabled=false;
     paddle_left->setLeft(background->Left +20);
     paddle_left->setTop(0.5*background->Height - paddle_left->getHeight()/2);
     paddle_right->setLeft(background->Width - 58);
@@ -323,6 +318,9 @@ void __fastcall TForm1::FormResize(TObject *Sender)
     scoreboard->setPointsTop(0.1*background->Height -15);
     scoreboard->setPointsForPlayerTop(0.2*background->Height - 10);
     scoreboard->setBounceTotalTop(0.3*background->Height - 5);
+
+    ball->setTop(0.5*background->Height);
+    ball->setLeft(0.5*background->Width);
 
     newRound->Left = 0.5*background->Width - newRound->Width/2;
     newRound->Top = 0.5*background->Height - newRound->Height/2;
