@@ -3,7 +3,6 @@
 
 #include <vcl.h>
 #pragma hdrstop
-#include <Graphics.hpp>
 #include "Unit1.h"
 
 class Ball
@@ -18,7 +17,7 @@ class Ball
       ball = new TImage(NULL);
       ball->Parent = Form1;
 
-      ball->Picture->LoadFromFile("img/my_ball.bmp");
+      ball->Picture->Bitmap->Handle=LoadBitmap(HInstance,"my_ball");
 
       ball->Left = left;
       ball->Top = top;
