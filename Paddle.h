@@ -5,7 +5,6 @@
 
 #include <vcl.h>
 #pragma hdrstop
-#include <Graphics.hpp>
 #include "Unit1.h"
 
 class Paddle
@@ -18,9 +17,9 @@ class Paddle
       y_paddle = -20;
       paddle = new TImage(NULL);
       paddle->Parent = Form1;
-
-      paddle->Picture->LoadFromFile("img/paddle3.bmp");
-
+  
+      paddle->Picture->Bitmap->Handle=LoadBitmap(HInstance,"paddle3");
+     
       paddle->Left = left;
       paddle->Top = top;
       paddle->Name = name;
